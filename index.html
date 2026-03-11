@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
+    <meta name="author" content="Ваше имя">
+    <meta name="keywords" content="Генетический алгоритм, эволюционное моделирование, оптимизация, веб-приложение">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <title>GenOptiBiz - Эволюционная оптимизация</title>
+    <style>
+            /* Основной фон */
+            body {
+                background-color: #f0e5d8; /* Светлый коричнево-бежевый фон */
+                min-height: 100vh;
+            }
+
+            /* Карточки */
+            .card {
+                background-color: #ffffff;
+                border: 3px solid #7c5e4a; /* Коричневый */
+                border-radius: 15px;
+                box-shadow: 8px 8px 0 #4a7c5e; /* Зеленая тень */
+            }
+
+            /* Заголовки карточек */
+            .card-header {
+                background-color: #ff7b9c; /* Розовый */
+                color: white;
+                font-weight: bold;
+                font-size: 1.1em;
+                border-bottom: 3px solid #7c5e4a; /* Коричневый */
+                border-radius: 12px 12px 0 0 !important;
+            }
+
+                /* Разные заголовки - тот же розовый, для единообразия */
+                .card-header.bg-success {
+                    background-color: #ff7b9c !important; /* Розовый */
+                }
+
+                .card-header.bg-primary {
+                    background-color: #ff7b9c !important; /* Розовый */
+                }
+
+                .card-header.bg-danger {
+                    background-color: #ff7b9c !important; /* Розовый */
+                }
+
+            /* Кнопка запуска */
+            .btn-success {
+                background-color: #ff7b9c; /* Розовый */
+                border: 3px solid #7c5e4a; /* Коричневый */
+                color: white;
+                font-weight: bold;
+                padding: 12px 40px;
+                border-radius: 10px;
+                text-transform: uppercase;
+                box-shadow: 5px 5px 0 #4a7c5e; /* Зеленая тень */
+            }
+
+                .btn-success:hover {
+                    background-color: #ff5a82; /* Темнее розовый */
+                    transform: translate(2px, 2px);
+                    box-shadow: 3px 3px 0 #4a7c5e;
+                }
+
+            /* Верхний алерт */
+            .alert-info {
+                background-color: #4a7c5e; /* Зеленый */
+                border: 3px solid #7c5e4a; /* Коричневый */
+                color: white;
+                border-radius: 15px;
+                font-weight: bold;
+                box-shadow: 5px 5px 0 #ff7b9c; /* Розовая тень */
+            }
+
+                .alert-info a {
+                    background-color: #ff7b9c; /* Розовый */
+                    border: 2px solid #7c5e4a; /* Коричневый */
+                    color: white;
+                    font-weight: bold;
+                }
+
+                    .alert-info a:hover {
+                        background-color: #ff5a82;
+                    }
+
+            /* Поля ввода */
+            .form-control, .form-select {
+                background-color: #fff9f5;
+                border: 3px solid #ff7b9c; /* Розовая рамка */
+                border-radius: 8px;
+                color: #3a2e26;
+                font-weight: 500;
+            }
+
+                .form-control:focus, .form-select:focus {
+                    border-color: #4a7c5e; /* Зеленый при фокусе */
+                    box-shadow: 0 0 0 3px rgba(74, 124, 94, 0.3);
+                    background-color: #ffffff;
+                }
+
+            /* Таблица */
+            .table {
+                color: #3a2e26;
+            }
+
+                .table thead th {
+                    background-color: #ff7b9c; /* Розовый */
+                    color: white;
+                    border: 2px solid #7c5e4a; /* Коричневый */
+                    padding: 10px;
+                }
+
+                .table tbody td {
+                    background-color: #fef9f5;
+                    border: 2px solid #4a7c5e; /* Зеленая рамка */
+                    padding: 8px;
+                }
+
+                .table tbody tr:hover td {
+                    background-color: #ffe4ec; /* Светло-розовый при наведении */
+                }
+
+            /* Бейджи */
+            .badge.bg-success {
+                background-color: #ff7b9c !important; /* Розовый */
+                color: white;
+                border: 2px solid #7c5e4a; /* Коричневый */
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+
+            .badge.bg-secondary {
+                background-color: #4a7c5e !important; /* Зеленый */
+                color: white;
+                border: 2px solid #7c5e4a; /* Коричневый */
+            }
+
+            /* Текст "Лучшее решение" */
+            #BestSolution {
+                background-color: #4a7c5e; /* Зеленый фон */
+                color: white !important;
+                border: 3px solid #7c5e4a; /* Коричневый */
+                padding: 10px 15px;
+                border-radius: 10px;
+                font-weight: bold;
+                display: inline-block;
+            }
+
+            /* Подвал */
+            .footer-link {
+                color: #ff7b9c !important; /* Розовый */
+                font-weight: bold;
+                text-decoration: none;
+                border-bottom: 2px solid #4a7c5e; /* Зеленая линия */
+            }
+
+                .footer-link:hover {
+                    color: #ff5a82 !important;
+                    border-bottom-color: #7c5e4a; /* Коричневая линия */
+                }
+
+            .text-muted {
+                color: #7c5e4a !important; /* Коричневый */
+                font-weight: 500;
+            }
+
+            /* Прогресс бар (если есть) */
+            .progress {
+                background-color: #f0e5d8;
+                border: 2px solid #7c5e4a; /* Коричневый */
+                border-radius: 8px;
+            }
+
+            .progress-bar {
+                background-color: #ff7b9c; /* Розовый */
+            }
+
+            /* Подсказки */
+            small.text-muted {
+                color: #7c5e4a !important; /* Коричневый */
+                font-weight: 500;
+            }
+
+            /* Выделение */
+            strong {
+                color: #ff7b9c; /* Розовый */
+            }
+
+            /* Границы и разделители */
+            .border-top {
+                border-top: 3px solid #4a7c5e !important; /* Зеленая линия */
+            }
+
+            /* Карточка с графиком */
+            .card-body canvas {
+                background-color: #fef9f5;
+                border: 3px solid #ff7b9c; /* Розовая рамка */
+                border-radius: 8px;
+                padding: 10px;
+            }
+
+            /* Цвета для графика (из main.js) - подсказка */
+            /* В main.js используйте:
+           - Розовый: #ff7b9c, #ff5a82
+           - Зеленый: #4a7c5e, #3d654b
+           - Коричневый: #7c5e4a, #634a3a
+        */
+    </style>
+</head>
+
+<body>
+    <div class="container mt-3">
+        <!-- Шапка с информацией -->
+        <div class="alert alert-info" role="alert">
+            <strong>GenOptiBiz</strong> - Веб-приложение для демонстрации работы генетических алгоритмов
+        </div>
+
+        <!-- Основная панель управления -->
+        <div class="row">
+            <div class="col-md-9 mb-2">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <strong>Параметры алгоритма</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 mb-2">
+                                <strong>Количество поколений</strong><br />
+                                <input type="number" class="form-control" id="GenerationsCount" value="30" min="10" max="500" />
+                                <small class="text-muted">Чем больше, тем точнее решение</small>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12 mb-2">
+                                <strong>Размер популяции</strong><br />
+                                <input type="number" class="form-control" id="SolutionsCount" value="6" min="2" max="50" />
+                                <small class="text-muted">Количество особей в поколении</small>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12 mb-2">
+                                <strong>Количество генов</strong><br />
+                                <input type="number" class="form-control" id="GenesCount" value="10" min="2" max="50" />
+                                <small class="text-muted">Длина хромосомы</small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 mb-2">
+                                <strong>Метод селекции</strong><br />
+                                <select class="form-control" id="SelectionTechnique">
+                                    <option value="1">Рулетка (пропорциональный отбор)</option>
+                                    <option value="2">Ранговая селекция</option>
+                                    <option value="3">Турнирная селекция</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12 mb-2">
+                                <strong>Тип кроссовера</strong><br />
+                                <select class="form-control" id="CrossoverTechnique">
+                                    <option value="1">Одноточечный</option>
+                                    <option value="2">Двухточечный</option>
+                                    <option value="3">Равномерный</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12 mb-2">
+                                <strong>Вероятность кроссовера</strong><br />
+                                <select id="CrossoverProbability" class="form-control">
+                                    <option value="0.1">10%</option>
+                                    <option value="0.2">20%</option>
+                                    <option value="0.3">30%</option>
+                                    <option value="0.4">40%</option>
+                                    <option value="0.5" selected>50% (рекомендуется)</option>
+                                    <option value="0.6">60%</option>
+                                    <option value="0.7">70%</option>
+                                    <option value="0.8">80%</option>
+                                    <option value="0.9">90%</option>
+                                    <option value="1">100%</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 mb-2">
+                                <strong>Вероятность мутации</strong><br />
+                                <select id="MutationProbability" class="form-control">
+                                    <option value="0.1">10%</option>
+                                    <option value="0.2">20%</option>
+                                    <option value="0.3">30%</option>
+                                    <option value="0.4">40%</option>
+                                    <option value="0.5" selected>50%</option>
+                                    <option value="0.6">60%</option>
+                                    <option value="0.7">70%</option>
+                                    <option value="0.8">80%</option>
+                                    <option value="0.9">90%</option>
+                                    <option value="1">100%</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12 mb-2">
+                                <strong>Элитизм</strong><br />
+                                <select class="form-control" id="ElitismStatus">
+                                    <option value="1">Включен (сохранять лучших)</option>
+                                    <option value="0">Выключен</option>
+                                </select>
+                                <small class="text-muted">Сохранение лучших особей</small>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12 mb-2" id="TournamentSizeContainer" style="display: none;">
+                                <strong>Размер турнира</strong><br />
+                                <input type="number" class="form-control" id="TournamentSize" value="3" min="2" max="50" />
+                                <small class="text-muted">Для турнирной селекции</small>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 text-center">
+                                <button type="button" class="btn btn-success btn-lg" id="RunGABtn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                         class="bi bi-play-fill" viewBox="0 0 16 16">
+                                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+                                    </svg>
+                                    Запустить алгоритм
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Информация о целевой функции -->
+            <div class="col-md-3 col-sm-12 mb-2">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white">
+                        <strong>Целевая функция</strong>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5>Сфера (Sphere)</h5>
+                        <img src="img/F1.png" class="img-fluid mt-2" alt="Функция Сферы" />
+                        <p class="mt-2 small text-muted">
+                            f(x) = x²<br />
+                            Поиск минимума функции
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Блок с результатами -->
+        <div class="row mb-2 mt-2">
+            <!-- Лог выполнения -->
+            <div class="col-md-4 col-sm-12 mb-2">
+                <div class="card pb-2">
+                    <div class="card-header bg-primary text-white">
+                        <strong>Журнал оптимизации</strong>
+                    </div>
+                    <div class="card-body" style="min-height: 350px; max-height: 350px; overflow-y: scroll;">
+                        <div class="mb-2" id="BestSolutionContainer" style="display: none;">
+                            <span class="badge bg-success">Лучшее решение</span> &nbsp;
+                            <span class="text-primary fw-bold" id="BestSolution"></span>
+                        </div>
+
+                        <!-- Прогресс выполнения -->
+                        <div id="ProgressInfo" style="display: none;" class="mb-2">
+                            <div class="progress">
+                                <div id="ProgressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                     role="progressbar" style="width: 0%">0%</div>
+                            </div>
+                        </div>
+
+                        <table class="table table-sm table-hover mb-2">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Поколение</th>
+                                    <th>Лучшая приспособленность</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ConvergenceValues">
+                                <tr>
+                                    <td colspan="2" class="text-center text-muted">
+                                        Запустите алгоритм для получения результатов
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- График сходимости -->
+            <div class="col-md-8 col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <strong>График сходимости</strong>
+                    </div>
+                    <div class="card-body" style="min-height: 350px;">
+                        <canvas class="w-100" id="ConvergenceCurve" style="height: 280px;"></canvas>
+                        <p class="text-muted small text-center mt-2">
+                            Показывает улучшение лучшего решения с каждым поколением
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Дополнительная информация -->
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <strong>О приложении</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Что это?</h6>
+                                <p class="small">
+                                    Веб-приложение для демонстрации работы генетического алгоритма
+                                    на примере минимизации функции Сферы.
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Как использовать?</h6>
+                                <p class="small">
+                                    1. Настройте параметры алгоритма<br />
+                                    2. Нажмите "Запустить алгоритм"<br />
+                                    3. Наблюдайте за сходимостью
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Применение в бизнесе</h6>
+                                <p class="small">
+                                    Алгоритм может быть адаптирован для:<br />
+                                    - Оптимизации маршрутов доставки<br />
+                                    - Раскроя материалов<br />
+                                    - Составления расписаний
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Подвал -->
+        <div class="text-center mb-2 pt-2 border-top">
+            <small class="text-muted">
+                GenOptiBiz v1.0 |
+                Разработано на основе
+                <a href="https://github.com/MMF/WebGA" class="footer-link" target="_blank">WebGA</a> |
+                © 2026 Эволюционное моделирование
+            </small>
+        </div>
+    </div>
+
+    <!-- Подключение скриптов -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/chart.min.js"></script>
+    <script src="js/GA/GeneticAlgorithm.js?v=8"></script>
+    <script src="js/GA/main.js?v=8"></script>
+</body>
+
+</html>
