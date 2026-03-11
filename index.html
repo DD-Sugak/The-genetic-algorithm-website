@@ -10,204 +10,229 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <title>GenOptiBiz - Эволюционная оптимизация</title>
     <style>
-            /* Основной фон */
-            body {
-                background-color: #f0e5d8; /* Светлый коричнево-бежевый фон */
-                min-height: 100vh;
-            }
+        /* Основной фон */
+        body {
+            background-color: #f0e5d8; /* Светлый коричнево-бежевый фон */
+            min-height: 100vh;
+        }
 
-            /* Карточки */
-            .card {
-                background-color: #ffffff;
-                border: 3px solid #7c5e4a; /* Коричневый */
-                border-radius: 15px;
-                box-shadow: 8px 8px 0 #4a7c5e; /* Зеленая тень */
-            }
+        /* Карточки */
+        .card {
+            background-color: #ffffff;
+            border: 3px solid #7c5e4a; /* Коричневый */
+            border-radius: 15px;
+            box-shadow: 8px 8px 0 #4a7c5e; /* Зеленая тень */
+        }
 
-            /* Заголовки карточек */
-            .card-header {
-                background-color: #ff7b9c; /* Розовый */
-                color: white;
-                font-weight: bold;
-                font-size: 1.1em;
-                border-bottom: 3px solid #7c5e4a; /* Коричневый */
-                border-radius: 12px 12px 0 0 !important;
-            }
+        /* Заголовки карточек */
+        .card-header {
+            background-color: #ff7b9c; /* Розовый */
+            color: white !important; /* БЕЛЫЙ ТЕКСТ */
+            font-weight: bold;
+            font-size: 1.1em;
+            border-bottom: 3px solid #7c5e4a; /* Коричневый */
+            border-radius: 12px 12px 0 0 !important;
+        }
 
-                /* Разные заголовки - тот же розовый, для единообразия */
-                .card-header.bg-success {
-                    background-color: #ff7b9c !important; /* Розовый */
-                }
-
-                .card-header.bg-primary {
-                    background-color: #ff7b9c !important; /* Розовый */
-                }
-
-                .card-header.bg-danger {
-                    background-color: #ff7b9c !important; /* Розовый */
-                }
-
-            /* Кнопка запуска */
-            .btn-success {
-                background-color: #ff7b9c; /* Розовый */
-                border: 3px solid #7c5e4a; /* Коричневый */
-                color: white;
-                font-weight: bold;
-                padding: 12px 40px;
-                border-radius: 10px;
-                text-transform: uppercase;
-                box-shadow: 5px 5px 0 #4a7c5e; /* Зеленая тень */
-            }
-
-                .btn-success:hover {
-                    background-color: #ff5a82; /* Темнее розовый */
-                    transform: translate(2px, 2px);
-                    box-shadow: 3px 3px 0 #4a7c5e;
-                }
-
-            /* Верхний алерт */
-            .alert-info {
-                background-color: #4a7c5e; /* Зеленый */
-                border: 3px solid #7c5e4a; /* Коричневый */
-                color: white;
-                border-radius: 15px;
-                font-weight: bold;
-                box-shadow: 5px 5px 0 #ff7b9c; /* Розовая тень */
-            }
-
-                .alert-info a {
-                    background-color: #ff7b9c; /* Розовый */
-                    border: 2px solid #7c5e4a; /* Коричневый */
-                    color: white;
-                    font-weight: bold;
-                }
-
-                    .alert-info a:hover {
-                        background-color: #ff5a82;
-                    }
-
-            /* Поля ввода */
-            .form-control, .form-select {
-                background-color: #fff9f5;
-                border: 3px solid #ff7b9c; /* Розовая рамка */
-                border-radius: 8px;
-                color: #3a2e26;
-                font-weight: 500;
-            }
-
-                .form-control:focus, .form-select:focus {
-                    border-color: #4a7c5e; /* Зеленый при фокусе */
-                    box-shadow: 0 0 0 3px rgba(74, 124, 94, 0.3);
-                    background-color: #ffffff;
-                }
-
-            /* Таблица */
-            .table {
-                color: #3a2e26;
-            }
-
-                .table thead th {
-                    background-color: #ff7b9c; /* Розовый */
-                    color: white;
-                    border: 2px solid #7c5e4a; /* Коричневый */
-                    padding: 10px;
-                }
-
-                .table tbody td {
-                    background-color: #fef9f5;
-                    border: 2px solid #4a7c5e; /* Зеленая рамка */
-                    padding: 8px;
-                }
-
-                .table tbody tr:hover td {
-                    background-color: #ffe4ec; /* Светло-розовый при наведении */
-                }
-
-            /* Бейджи */
-            .badge.bg-success {
-                background-color: #ff7b9c !important; /* Розовый */
-                color: white;
-                border: 2px solid #7c5e4a; /* Коричневый */
-                font-size: 0.9em;
-                padding: 8px 15px;
-            }
-
-            .badge.bg-secondary {
-                background-color: #4a7c5e !important; /* Зеленый */
-                color: white;
-                border: 2px solid #7c5e4a; /* Коричневый */
-            }
-
-            /* Текст "Лучшее решение" */
-            #BestSolution {
-                background-color: #4a7c5e; /* Зеленый фон */
+            /* ВСЕ надписи в заголовках карточек - БЕЛЫЕ */
+            .card-header * {
                 color: white !important;
-                border: 3px solid #7c5e4a; /* Коричневый */
-                padding: 10px 15px;
-                border-radius: 10px;
-                font-weight: bold;
-                display: inline-block;
             }
 
-            /* Подвал */
-            .footer-link {
-                color: #ff7b9c !important; /* Розовый */
-                font-weight: bold;
-                text-decoration: none;
-                border-bottom: 2px solid #4a7c5e; /* Зеленая линия */
+            /* Разные заголовки - тот же розовый, для единообразия */
+            .card-header.bg-success {
+                background-color: #ff7b9c !important; /* Розовый */
             }
 
-                .footer-link:hover {
-                    color: #ff5a82 !important;
-                    border-bottom-color: #7c5e4a; /* Коричневая линия */
+            .card-header.bg-primary {
+                background-color: #ff7b9c !important; /* Розовый */
+            }
+
+            .card-header.bg-danger {
+                background-color: #ff7b9c !important; /* Розовый */
+            }
+
+        /* Кнопка запуска */
+        .btn-success {
+            background-color: #ff7b9c; /* Розовый */
+            border: 3px solid #7c5e4a; /* Коричневый */
+            color: white !important; /* БЕЛЫЙ ТЕКСТ */
+            font-weight: bold;
+            padding: 12px 40px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            box-shadow: 5px 5px 0 #4a7c5e; /* Зеленая тень */
+        }
+
+            .btn-success:hover {
+                background-color: #ff5a82; /* Темнее розовый */
+                transform: translate(2px, 2px);
+                box-shadow: 3px 3px 0 #4a7c5e;
+            }
+
+        /* Верхний алерт */
+        .alert-info {
+            background-color: #4a7c5e; /* Зеленый */
+            border: 3px solid #7c5e4a; /* Коричневый */
+            color: white !important; /* БЕЛЫЙ ТЕКСТ */
+            border-radius: 15px;
+            font-weight: bold;
+            box-shadow: 5px 5px 0 #ff7b9c; /* Розовая тень */
+        }
+
+            .alert-info a {
+                background-color: #ff7b9c; /* Розовый */
+                border: 2px solid #7c5e4a; /* Коричневый */
+                color: white !important; /* БЕЛЫЙ ТЕКСТ */
+                font-weight: bold;
+            }
+
+                .alert-info a:hover {
+                    background-color: #ff5a82;
                 }
 
-            .text-muted {
-                color: #7c5e4a !important; /* Коричневый */
-                font-weight: 500;
+        /* Поля ввода */
+        .form-control, .form-select {
+            background-color: #fff9f5;
+            border: 3px solid #ff7b9c; /* Розовая рамка */
+            border-radius: 8px;
+            color: #3a2e26;
+            font-weight: 500;
+        }
+
+            .form-control:focus, .form-select:focus {
+                border-color: #4a7c5e; /* Зеленый при фокусе */
+                box-shadow: 0 0 0 3px rgba(74, 124, 94, 0.3);
+                background-color: #ffffff;
             }
 
-            /* Прогресс бар (если есть) */
-            .progress {
-                background-color: #f0e5d8;
-                border: 2px solid #7c5e4a; /* Коричневый */
-                border-radius: 8px;
-            }
+        /* Таблица */
+        .table {
+            color: #3a2e26;
+        }
 
-            .progress-bar {
+            .table thead th {
                 background-color: #ff7b9c; /* Розовый */
-            }
-
-            /* Подсказки */
-            small.text-muted {
-                color: #7c5e4a !important; /* Коричневый */
-                font-weight: 500;
-            }
-
-            /* Выделение */
-            strong {
-                color: #ff7b9c; /* Розовый */
-            }
-
-            /* Границы и разделители */
-            .border-top {
-                border-top: 3px solid #4a7c5e !important; /* Зеленая линия */
-            }
-
-            /* Карточка с графиком */
-            .card-body canvas {
-                background-color: #fef9f5;
-                border: 3px solid #ff7b9c; /* Розовая рамка */
-                border-radius: 8px;
+                color: white !important; /* БЕЛЫЙ ТЕКСТ */
+                border: 2px solid #7c5e4a; /* Коричневый */
                 padding: 10px;
             }
 
-            /* Цвета для графика (из main.js) - подсказка */
-            /* В main.js используйте:
-           - Розовый: #ff7b9c, #ff5a82
-           - Зеленый: #4a7c5e, #3d654b
-           - Коричневый: #7c5e4a, #634a3a
-        */
+            .table tbody td {
+                background-color: #fef9f5;
+                border: 2px solid #4a7c5e; /* Зеленая рамка */
+                padding: 8px;
+            }
+
+            .table tbody tr:hover td {
+                background-color: #ffe4ec; /* Светло-розовый при наведении */
+            }
+
+        /* Бейджи */
+        .badge.bg-success {
+            background-color: #ff7b9c !important; /* Розовый */
+            color: white !important; /* БЕЛЫЙ ТЕКСТ */
+            border: 2px solid #7c5e4a; /* Коричневый */
+            font-size: 0.9em;
+            padding: 8px 15px;
+        }
+
+        .badge.bg-secondary {
+            background-color: #4a7c5e !important; /* Зеленый */
+            color: white !important; /* БЕЛЫЙ ТЕКСТ */
+            border: 2px solid #7c5e4a; /* Коричневый */
+        }
+
+        /* Текст "Лучшее решение" */
+        #BestSolution {
+            background-color: #4a7c5e; /* Зеленый фон */
+            color: white !important; /* БЕЛЫЙ ТЕКСТ */
+            border: 3px solid #7c5e4a; /* Коричневый */
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        /* Подвал */
+        .footer-link {
+            color: #ff7b9c !important; /* Розовый */
+            font-weight: bold;
+            text-decoration: none;
+            border-bottom: 2px solid #4a7c5e; /* Зеленая линия */
+        }
+
+            .footer-link:hover {
+                color: #ff5a82 !important;
+                border-bottom-color: #7c5e4a; /* Коричневая линия */
+            }
+
+        .text-muted {
+            color: #7c5e4a !important; /* Коричневый */
+            font-weight: 500;
+        }
+
+        /* Прогресс бар (если есть) */
+        .progress {
+            background-color: #f0e5d8;
+            border: 2px solid #7c5e4a; /* Коричневый */
+            border-radius: 8px;
+        }
+
+        .progress-bar {
+            background-color: #ff7b9c; /* Розовый */
+        }
+
+        /* Подсказки */
+        small.text-muted {
+            color: #7c5e4a !important; /* Коричневый */
+            font-weight: 500;
+        }
+
+        /* Выделение */
+        strong {
+            color: #ff7b9c; /* Розовый */
+        }
+
+        /* Границы и разделители */
+        .border-top {
+            border-top: 3px solid #4a7c5e !important; /* Зеленая линия */
+        }
+
+        /* Карточка с графиком */
+        .card-body canvas {
+            background-color: #fef9f5;
+            border: 3px solid #ff7b9c; /* Розовая рамка */
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        /* ДОБАВЛЯЕМ БЕЛЫЙ ТЕКСТ ДЛЯ ВСЕХ НАДПИСЕЙ НА ЦВЕТНОМ ФОНЕ */
+        .card-header,
+        .btn-success,
+        .alert-info,
+        .alert-info a,
+        .table thead th,
+        .badge,
+        #BestSolution {
+            color: white !important;
+        }
+
+        /* СПЕЦИАЛЬНО ДЛЯ ПОДПИСИ НА ГРАФИКЕ "best fitness" */
+        .chartjs-legend,
+        .chartjs-legend-item,
+        .chart-legend,
+        canvas + *,
+        [class*="legend"] {
+            color: white !important;
+            fill: white !important;
+        }
+
+        /* ДЛЯ ВСЕХ ТЕКСТОВЫХ ЭЛЕМЕНТОВ НА РОЗОВОМ ФОНЕ */
+        [style*="background-color: #ff7b9c"],
+        [style*="background: #ff7b9c"] {
+            color: white !important;
+        }
     </style>
 </head>
 
